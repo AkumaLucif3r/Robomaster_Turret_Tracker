@@ -1,0 +1,8 @@
+prefix=/home/ben/interbotix_ws/devel
+
+Name: interbotix_xsturret_object_tracker
+Description: Description of interbotix_xsturret_object_tracker
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: apriltag_ros camera_calibration cv_bridge interbotix_xsturret_control interbotix_xs_msgs rospy sensor_msgs std_msgs std_srvs usb_cam

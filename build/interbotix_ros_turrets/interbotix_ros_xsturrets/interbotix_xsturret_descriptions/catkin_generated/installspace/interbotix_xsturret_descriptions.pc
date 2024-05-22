@@ -1,0 +1,8 @@
+prefix=/home/ben/interbotix_ws/install
+
+Name: interbotix_xsturret_descriptions
+Description: Description of interbotix_xsturret_descriptions
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: joint_state_publisher joint_state_publisher_gui robot_state_publisher roslaunch rviz xacro

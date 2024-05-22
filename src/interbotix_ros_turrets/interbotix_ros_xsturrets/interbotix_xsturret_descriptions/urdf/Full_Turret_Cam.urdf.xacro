@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Full_Turret_Cam">
+  
+  <link name = "world"/>
+  <joint name = "base_joint" type = "fixed">
+  	<parent link = "world"/>
+  	<child link = "base_link"/>
+  	<origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </joint>
+  
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="3.8271E-06 -0.0063363 0.035864"
+        rpy="0 0 0" />
+      <mass
+        value="0.31366" />
+      <inertia
+        ixx="0.00010778"
+        ixy="-1.229E-08"
+        ixz="3.5754E-09"
+        iyy="0.00018462"
+        iyz="4.8512E-07"
+        izz="0.00011977" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://interbotix_xsturret_descriptions/meshes/robomaster_meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://interbotix_xsturret_descriptions/meshes/robomaster_meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link_gimbal">
+    <inertial>
+      <origin
+        xyz="4.82470555396846E-05 0.165635987434389 0.0505707637403498"
+        rpy="0 0 0" />
+      <mass
+        value="0.630313397808136" />
+      <inertia
+        ixx="0.00136540116787239"
+        ixy="-5.09335672254972E-07"
+        ixz="4.13981699477408E-07"
+        iyy="0.000956399091180865"
+        iyz="-2.53203420750065E-07"
+        izz="0.00131526403313019" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://interbotix_xsturret_descriptions/meshes/robomaster_meshes/link_gimbal.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.501960784313725 0.0745098039215686 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://interbotix_xsturret_descriptions/meshes/robomaster_meshes/link_gimbal.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_gimbal"
+    type="revolute">
+    <origin
+      xyz="0 -0.035754 -0.036382"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_gimbal" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.571"
+      upper="1.571"
+      effort="100"
+      velocity="0.5" />
+  </joint>
+  <link
+    name="shooter_link">
+    <inertial>
+      <origin
+        xyz="0.0270757676390435 0.000776777777232895 0.00152595494140505"
+        rpy="0 0 0" />
+      <mass
+        value="1.3795227613263" />
+      <inertia
+        ixx="0.0013118264962795"
+        ixy="1.41669475616012E-05"
+        ixz="-1.69718241975551E-06"
+        iyy="0.00253898726900362"
+        iyz="-6.17522564990154E-07"
+        izz="0.00138219228632502" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://interbotix_xsturret_descriptions/meshes/robomaster_meshes/shooter_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://interbotix_xsturret_descriptions/meshes/robomaster_meshes/shooter_link.STL" />
+       </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shooter_joint"
+    type="revolute">
+    <origin
+      xyz="0.00032552 0.23883 0.004246"
+      rpy="0 0 0" />
+    <parent
+      link="link_gimbal" />
+    <child
+      link="shooter_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.7854"
+      upper="0.7854"
+      effort="300"
+      velocity="0.5" />
+  </joint>
+  <transmission name="gimbal">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_gimbal">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gimbal_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+   <transmission name="shooter_tilt">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shooter_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="tilt_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <joint name="camera" type="fixed">
+    <origin rpy="${-pi/2} 0 ${-pi/2}" xyz="0.0312 0 0.03"/>
+    <parent link="shooter_link"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <link name="camera_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://interbotix_xsturret_descriptions/meshes/pxxls_cam_meshes/pxxls_cam_camera.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://interbotix_xsturret_descriptions/meshes/pxxls_cam_meshes/pxxls_cam_camera.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  
+</robot>
