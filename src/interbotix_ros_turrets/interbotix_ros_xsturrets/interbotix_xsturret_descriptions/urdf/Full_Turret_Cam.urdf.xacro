@@ -7,7 +7,7 @@
   
   <link name = "world"/>
   <joint name = "base_joint" type = "fixed">
-  	<parent link = "world"/>
+  	<parent link = "world"/> 
   	<child link = "base_link"/>
   	<origin rpy = "0 0 0" xyz = "0 0 0"/>
   </joint>
@@ -189,14 +189,14 @@
   </transmission>
   
   <joint name="camera" type="fixed">
-    <origin rpy="${-pi/2} 0 ${-pi/2}" xyz="0.0312 0 0.03"/>
+    <origin rpy="${-pi/2} ${-pi/2} ${-pi/2}" xyz="0.00035552 0.000776777777232895 0.004546"/>
     <parent link="shooter_link"/>
     <child link="camera_link"/>
   </joint>
 
   <link name="camera_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0.0006777777232895 0.00152595494140505"/>
       <geometry>
         <mesh filename="package://interbotix_xsturret_descriptions/meshes/pxxls_cam_meshes/pxxls_cam_camera.stl" scale="0.001 0.001 0.001"/>
       </geometry>
